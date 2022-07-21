@@ -8,6 +8,7 @@ This project will further my knowledge on an open world 2D Game.  I'm developing
 - [ ] Create the world 
 - [ ] Create tiles
 - [ ] Create a chunk system for efficency.
+- [ ] Procedurelly generate terrian.
 
 ## Bugs
 Please create Issues if you find any bugs.  I will fix them asap.

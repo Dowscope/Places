@@ -1,1 +1,5 @@
+# Visual Studio Code files that are not needed.
 .vscode/
+
+# The compiled executable is not needed in git land
+*.run
