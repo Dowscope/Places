@@ -6,6 +6,7 @@
 
 // Declare Functions
 void initialize();
+void shutdown();
 
 // Declare Global Variables
 Screen* screen;
@@ -13,6 +14,7 @@ Screen* screen;
 int main(int argc, char const *argv[])
 {
     initialize();
+    shutdown();
     return 0;
 }
 
@@ -33,7 +35,14 @@ void initialize()
     std::cout << " ///////////         ///////" << std::endl;
     std::cout << std::endl;
     std::cout << "------------------------------------------" << std::endl;
-    
+
     std::cout << "The game is now initializing" << std::endl;
     screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
+void shutdown()
+{
+    std::cout << "Game is shutting down" << std::endl;
+    delete screen;
+    std::cout << "Game Shut Down SUCCESSFUL" << std::endl;
 }

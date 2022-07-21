@@ -16,6 +16,8 @@ public:
 private:
     int _screenWidth, _screenHeight;
     bool _hasInitialized = false;
+    SDL_Window* _mainWindow;
+    SDL_Renderer* _mainRenderer;
 
     bool _initialize();
 };
