@@ -2,7 +2,10 @@
 This project will further my knowledge on an open world 2D Game.  I'm developing this on a linux machine.  Yes it should compile to a windows box, but I just want to put that out there.
 
 ## To Run
-``` make ```
+```bash 
+make
+./game.run
+```
 
 ## To Do
 - [x] Creating a window using SDL
