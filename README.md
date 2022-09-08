@@ -12,9 +12,9 @@ make
 ## To Do
 - [x] Creating a window using SDL
 - [x] Create an event system to shut the window down.
-- [ ] Add frame rate to the title bar so that we can see the current FPS.
-- [ ] Create the world 
-- [ ] Create tiles
+- [x] Add frame rate to the title bar so that we can see the current FPS.
+- [x] Create the world 
+- [x] Create tiles
 - [ ] Create a chunk system for efficency.
 - [ ] Procedurelly generate terrian.
 

@@ -1,9 +1,7 @@
 #include "Screen.h"
 
-using namespace std;
-
-Screen::Screen(int w, int h):
-    _screenHeight(h), _screenWidth(w)
+Screen::Screen(int w, int h, int tileSize):
+    _screenHeight(h), _screenWidth(w), _tileSize(tileSize)
 {
     std::cout << "Screen is starting... Prepare for initialization" << std::endl;
     _hasInitialized = _initialize();
@@ -42,7 +40,7 @@ bool Screen::_initialize()
     std::cout << "OK!" << std::endl;
 
     std::cout << "Creating Window... ";
-    _mainWindow = SDL_CreateWindow( "Places",
+    _mainWindow = SDL_CreateWindow( "Game",
                                     SDL_WINDOWPOS_CENTERED,
                                     SDL_WINDOWPOS_CENTERED,
                                     _screenWidth,
@@ -68,4 +66,23 @@ bool Screen::_initialize()
 
     std::cout << "Initialization Successful" << std::endl;
     return true;
+}
+
+void Screen::setTitle(const char* newTitle)
+{
+    SDL_SetWindowTitle(_mainWindow, newTitle);
+}
+
+void Screen::clear() {
+    SDL_SetRenderDrawColor(_mainRenderer, 0,0,0,255);
+}
+
+void Screen::present() {
+    SDL_RenderPresent(_mainRenderer);
+}
+
+void Screen::drawRect(int x, int y, int r, int g, int b, int a) {
+    const SDL_Rect rect = { x * _tileSize, y * _tileSize, _tileSize, _tileSize };
+    SDL_SetRenderDrawColor(_mainRenderer, r,g,b,a);
+    SDL_RenderFillRect(_mainRenderer, &rect);
 }
