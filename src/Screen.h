@@ -2,6 +2,7 @@
 #define __SCREEN_H__
 
 #include <iostream>
+#include <vector>
 #include <SDL2/SDL.h>
 
 ///////////////////////////////////////////////////////////
@@ -14,14 +15,17 @@ public:
     ~Screen();
     bool didInitialize(){return _hasInitialized;}
     void setTitle(const char* newTitle);
+    int loadSpriteSheet(const char* filePath);
     void clear();
     void present();
     void drawRect(int x, int y, int r, int g, int b, int a);
+    void drawTile(int x, int y, int type);
 private:
     int _screenWidth, _screenHeight, _tileSize;
     bool _hasInitialized = false;
     SDL_Window* _mainWindow;
     SDL_Renderer* _mainRenderer;
+    std::vector<std::pair<const char*, SDL_Surface*>> _spriteSheets;
 
     bool _initialize();
 };

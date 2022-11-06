@@ -73,6 +73,22 @@ void Screen::setTitle(const char* newTitle)
     SDL_SetWindowTitle(_mainWindow, newTitle);
 }
 
+int Screen::loadSpriteSheet(const char* filePath){
+    for (size_t i = 0; i < _spriteSheets.size(); i++){
+        if (_spriteSheets[i].first == filePath){
+            std::cout << "SpriteSheet - " << filePath << " already loaded" << std::endl;
+            return 1;
+        }
+    }
+    SDL_Surface* ss = SDL_LoadBMP(filePath);
+    if (!ss) {
+        std::cout << "SpriteSheet - " << filePath << " Did not load" << std::endl;
+        return 2;
+    }
+    _spriteSheets.push_back(std::make_pair(filePath, ss));
+    return 0;
+}
+
 void Screen::clear() {
     SDL_SetRenderDrawColor(_mainRenderer, 0,0,0,255);
 }
@@ -85,4 +101,8 @@ void Screen::drawRect(int x, int y, int r, int g, int b, int a) {
     const SDL_Rect rect = { x * _tileSize, y * _tileSize, _tileSize, _tileSize };
     SDL_SetRenderDrawColor(_mainRenderer, r,g,b,a);
     SDL_RenderFillRect(_mainRenderer, &rect);
+}
+
+void Screen::drawTile(int x, int y, int tupe){
+
 }

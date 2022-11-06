@@ -4,7 +4,7 @@
 #include <vector>
 #include <cstdlib>
 #include <time.h>
-#include "Tile.h"
+#include "Chunk.h"
 
 ///////////////////////////////////////////////////////////
 /// @brief World
@@ -12,17 +12,20 @@
 class World
 {
 public:
-    World(int w, int h);
+    static int CHUNKSIZE;
+
+    World(int chunkSize);
     ~World();
+
+    Chunk* getChunkAt(int worldX, int worldY);
 
     int getCurrentWorldWidth() { return _width; }
     int getCurrentWorldHeight() { return _height; }
-    std::vector<Tile*>* getTiles() { return &_tiles; }
 
 private:
     int _width;
     int _height;
-    std::vector<Tile*> _tiles;
+    std::vector<Chunk*> _chunks;
 };
 
 #endif  // __WORLD_H__

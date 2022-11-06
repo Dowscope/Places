@@ -8,6 +8,7 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define TILE_SIZE 64
+#define CHUNK_SIZE 16
 
 #define DEBUGGER_SW false
 
@@ -72,7 +73,7 @@ void initialize()
     screen->setTitle("Places");
     eventSystem = new EventSystem();
     timeSystem = new TimeSystem(DEBUGGER_SW);
-    world = new World(100, 100);
+    world = new World(CHUNK_SIZE);
 }
 
 void shutdown()
@@ -93,26 +94,7 @@ void update()
 // this function is called every frame and renders the graphics to the window
 void render()
 {
-    std::vector<Tile*>* tiles = world->getTiles();
-    for (size_t i = 0; i < tiles->size(); i++){
-        int x = tiles->at(i)->getX();
-        int y = tiles->at(i)->getY();
-        int r, g, b;
-        switch (tiles->at(i)->getTileType())
-        {
-        case 0:
-            r = 0; g = 0; b = 255;
-            break;
-        case 1:
-            r = 0; g = 255; b = 0;
-            break;
-        
-        default:
-            r = 0; g = 0; b = 0;
-            break;
-        }
-        screen->drawRect(x, y, r, g, b, 255);
-    }
+    Chunk* c = world->getChunkAt(0,0);
     
     
 }

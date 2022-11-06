@@ -1,19 +1,31 @@
 #include "World.h"
 
-World::World(int w, int h):
-    _width(w), _height(h)
+World::World(int chunkSize)
 {
+    World::CHUNKSIZE = chunkSize;
+
     // Intialize Rand
     srand (time(NULL));
     
-    for (int y = 0; y < _height; y++){
-        for (int x = 0; x < _width; x++) {
-            _tiles.push_back(new Tile(x, y, rand() % 2));
-        }
-    }
+    _chunks.push_back(new Chunk(0, 0));
 }
 
 World::~World()
 {
-    // TODO: Needs implementation
+    while (!_chunks.empty())
+    {
+        _chunks.pop_back();
+    }
+    
+}
+
+Chunk* World::getChunkAt(int worldX, int worldY){
+    for (std::vector<Chunk*>::iterator it = _chunks.begin(); it != _chunks.end(); ++it){
+        Chunk* c = *it;
+        if (worldX >= c->getWorldX() && worldX < c->getWorldX() + World::CHUNKSIZE &&
+            worldY >= c->getWorldY() && worldY < c->getWorldY() + World::CHUNKSIZE){
+            return c;
+        }
+    }
+    return nullptr;
 }
