@@ -18,7 +18,8 @@ public:
     int loadSpriteSheet(const char* filePath);
     void clear();
     void present();
-    void drawRect(int x, int y, int r, int g, int b, int a);
+    void drawSelectIcon(int x, int y);
+    void drawRect(int x, int y, int r, int g, int b, int a, int chunksize);
     void drawTile(int x, int y, int type);
 private:
     int _screenWidth, _screenHeight, _tileSize;

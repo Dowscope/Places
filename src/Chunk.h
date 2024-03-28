@@ -1,25 +1,27 @@
 #ifndef __CHUNK_H__
 #define __CHUNK_H__
 
-#include <vector>
-#include <random>
-#include "World.h"
-#include "Tile.h"
-
 ///////////////////////////////////////////////////////////
 /// @brief Chunk
 ///
+
+#include <vector>
+#include <optional>
+#include "Tile.h"
+
 class Chunk
 {
 public:
-    Chunk(int worldX, int worldY);
+    Chunk(int x, int y, int width);
     ~Chunk();
 
-    int getWorldX() { return _worldX; }
-    int getWorldY() { return _worldY; }
+    int getX() { return _x; }
+    int getY() { return _y; }
+    std::optional<Tile> GetChunkTileAt(int x, int y);
+
 private:
-    int _worldX, _worldY;
-    std::vector<Tile*> _tiles;
+    int _width, _x, _y;
+    std::vector<Tile> _tiles;
 };
 
 #endif  // __CHUNK_H__

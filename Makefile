@@ -1,5 +1,11 @@
+COMPILER := gcc
+STANDARD := c++20
+OUTPUT := game.run
+LIBRARIES := -lSDL2 -lSDL2main -lstdc++
+FILES := src/*.cpp
+
 main:
-	gcc -std=c++20 src/*.cpp -o game.run -lSDL2 -lSDL2main -lstdc++
+	$(COMPILER) -std=$(STANDARD) $(FILES) -o $(OUTPUT) $(LIBRARIES)
 
 clear:
-	rm game.run
+	rm -f $(OUTPUT)

@@ -1,25 +1,34 @@
 #include "Chunk.h"
 
+using namespace std;
 
-Chunk::Chunk(int worldX, int worldY):
-    _worldX(worldX), _worldY(worldY)
+Chunk::Chunk(int x, int y, int width) : 
+    _x(x), _y(y), _width(width)
 {
-    for (int y = 0; y < World::CHUNKSIZE; y++)
+    for (size_t y = 0; y < _width; y++)
     {
-        for (int x = 0; x < World::CHUNKSIZE; x++)
+        for (size_t x = 0; x < _width; x++)
         {
-            _tiles.push_back(new Tile(x, y, rand() % 2));
+            _tiles.push_back(Tile(x, y, 1));
         }
     }
-    
 }
 
 Chunk::~Chunk()
 {
-    while (!_tiles.empty())
+    _tiles.clear();
+}
+
+std::optional<Tile> Chunk::GetChunkTileAt(int x, int y)
+{
+    for (size_t i = 0; i < _tiles.size(); i++)
     {
-        _tiles.pop_back();
+        Tile t = _tiles[i];
+        if (t.getX() == x && t.getY() == y)
+        {
+            return std::optional<Tile>(t);
+        }
     }
-    
-    
+
+  return std::nullopt;
 }

@@ -13,10 +13,15 @@ public:
     EventSystem();
     ~EventSystem();
     void checkEvents();
+    void registerMouseCoordinates(int* mouseX, int* mouseY);
+    void registerSelectorIconCoordinates(int* x, int* y);
 
     bool shouldWindowClose = false;
 private:
-    // Members
+    int* _mouseX;
+    int* _mouseY;
+    int* _selectIconX;
+    int* _selectIconY;
 };
 
 #endif  // __EVENT_SYSTEM_H__

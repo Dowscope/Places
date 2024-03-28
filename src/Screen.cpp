@@ -4,6 +4,9 @@ Screen::Screen(int w, int h, int tileSize):
     _screenHeight(h), _screenWidth(w), _tileSize(tileSize)
 {
     std::cout << "Screen is starting... Prepare for initialization" << std::endl;
+    std::cout << "Screen Width set to: " << _screenWidth << std::endl;
+    std::cout << "Screen Height set to: " << _screenHeight << std::endl;
+    std::cout << "Tile Size set to: " << _tileSize << std::endl;
     _hasInitialized = _initialize();
 }
 
@@ -91,14 +94,24 @@ int Screen::loadSpriteSheet(const char* filePath){
 
 void Screen::clear() {
     SDL_SetRenderDrawColor(_mainRenderer, 0,0,0,255);
+    SDL_RenderClear(_mainRenderer);
 }
 
 void Screen::present() {
     SDL_RenderPresent(_mainRenderer);
 }
 
-void Screen::drawRect(int x, int y, int r, int g, int b, int a) {
-    const SDL_Rect rect = { x * _tileSize, y * _tileSize, _tileSize, _tileSize };
+void Screen::drawSelectIcon(int x, int y)
+{
+    const SDL_Rect rect = { x, y, _tileSize, _tileSize };
+    SDL_RenderDrawRect(_mainRenderer, &rect);
+}
+
+void Screen::drawRect(int x, int y, int r, int g, int b, int a, int chunksize) {
+    int cameraX = (_screenWidth / 2) - (chunksize * _tileSize / 2);
+    int cameraY = (_screenHeight / 2) - (chunksize * _tileSize / 2);
+
+    const SDL_Rect rect = { cameraX + (x * _tileSize), cameraY + (y * _tileSize), _tileSize, _tileSize };
     SDL_SetRenderDrawColor(_mainRenderer, r,g,b,a);
     SDL_RenderFillRect(_mainRenderer, &rect);
 }

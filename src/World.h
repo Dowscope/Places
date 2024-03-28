@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdlib>
 #include <time.h>
+#include <optional>
 #include "Chunk.h"
 
 ///////////////////////////////////////////////////////////
@@ -11,21 +12,21 @@
 ///
 class World
 {
+private:
+    int _width;
+    int _height;
+    std::vector<Chunk> _chunks;
 public:
-    static int CHUNKSIZE;
+    const int CHUNKSIZE;
 
     World(int chunkSize);
     ~World();
 
-    Chunk* getChunkAt(int worldX, int worldY);
-
     int getCurrentWorldWidth() { return _width; }
     int getCurrentWorldHeight() { return _height; }
 
-private:
-    int _width;
-    int _height;
-    std::vector<Chunk*> _chunks;
+    std::optional<Chunk> GetChunkAt(int x, int y);
+
 };
 
 #endif  // __WORLD_H__
